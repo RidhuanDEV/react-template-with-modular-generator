@@ -13,14 +13,6 @@ export const QUERY_KEYS = {
     ME: ["auth", "me"],
     LOGIN: ["auth", "login"],
   },
-  USERS: {
-    LIST: ["users"],
-    DETAIL: (id: string) => ["users", id],
-  },
-  EXAMPLES: {
-    LIST: ["examples"],
-    DETAIL: (id: string) => ["examples", id],
-  },
 } as const;
 
 export const PAGINATION = {

@@ -19,6 +19,21 @@
     /* Path aliases */
     "baseUrl": ".",
     "paths": {
+      "@/components": ["src/shared/components"],
+      "@/components/*": ["src/shared/components/*"],
+      "@/hooks": ["src/shared/hooks"],
+      "@/hooks/*": ["src/shared/hooks/*"],
+      "@/lib": ["src/shared/lib"],
+      "@/lib/*": ["src/shared/lib/*"],
+      "@/types": ["src/shared/types"],
+      "@/types/*": ["src/shared/types/*"],
+      "@/utils": ["src/shared/utils"],
+      "@/utils/*": ["src/shared/utils/*"],
+      "@/styles": ["src/shared/styles"],
+      "@/styles/*": ["src/shared/styles/*"],
+      "@/store/*": ["src/store/*"],
+      "@/features/*": ["src/features/*"],
+      "@/config/*": ["src/config/*"],
       "@/*": ["src/*"]
     },
 

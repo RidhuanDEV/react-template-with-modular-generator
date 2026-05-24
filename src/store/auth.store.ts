@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { STORAGE_KEYS } from "@/config/constants";
-import type { AuthUser } from "@/features/auth/types";
+import type { AuthUser } from "@/types/auth.types";
 
 interface AuthState {
   token: string | null;

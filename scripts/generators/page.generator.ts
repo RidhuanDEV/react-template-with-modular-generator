@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const pageName = process.argv[2];
-const feature = process.argv[3];
+const pageName: string | undefined = process.argv[2];
+const feature: string | undefined = process.argv[3];
 
 if (!pageName) {
   console.error("Usage: npm run generate:page <Name> [feature]");
@@ -51,40 +51,34 @@ if (fs.existsSync(pageFile)) {
   process.exit(1);
 }
 
-const pageContent = `import { EmptyState } from '@/components/feedback';
-import { PageContainer, PageHeader } from '@/components/layout';
+// Load templates
+const templateDir = path.resolve(process.cwd(), "scripts", "templates", "page");
+const pageTplPath = path.join(templateDir, "Page.tsx.tpl");
+const indexTplPath = path.join(templateDir, "index.ts.tpl");
 
-const ${pascalCase}Page = () => {
-  return (
-    <PageContainer>
-      <PageHeader
-        title="${pascalCase}"
-        description="Generated page scaffold. Replace this empty state with a real workflow."
-      />
-      <EmptyState
-        title="${pascalCase} page ready"
-        description="Add domain-specific content, queries, and actions here."
-      />
-    </PageContainer>
-  );
-};
+if (!fs.existsSync(pageTplPath) || !fs.existsSync(indexTplPath)) {
+  console.error("Template files not found in scripts/templates/page/");
+  process.exit(1);
+}
 
-export default ${pascalCase}Page;
-`;
+let pageContent = fs.readFileSync(pageTplPath, "utf-8");
+pageContent = pageContent.replace(/\{\{pascalCase\}\}/g, pascalCase);
 
 fs.writeFileSync(pageFile, pageContent, "utf-8");
 console.info(`Created: ${pageFile}`);
 
 // Update index
 const indexFile = path.join(pageDir, "index.ts");
-const exportLine = `export { default as ${pascalCase}Page } from './${pascalCase}Page';\n`;
+let indexExportLine = fs.readFileSync(indexTplPath, "utf-8");
+indexExportLine = indexExportLine.replace(/\{\{pascalCase\}\}/g, pascalCase);
+
 if (fs.existsSync(indexFile)) {
   const existing = fs.readFileSync(indexFile, "utf-8");
-  if (!existing.includes(exportLine.trim())) {
-    fs.appendFileSync(indexFile, exportLine, "utf-8");
+  if (!existing.includes(indexExportLine.trim())) {
+    fs.appendFileSync(indexFile, indexExportLine, "utf-8");
   }
 } else {
-  fs.writeFileSync(indexFile, exportLine, "utf-8");
+  fs.writeFileSync(indexFile, indexExportLine, "utf-8");
 }
 
 const location = feature ? `src/features/${feature}/pages/` : "src/app/pages/";

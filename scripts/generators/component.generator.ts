@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const componentName = process.argv[2];
-const subdir = process.argv[3] ?? "ui";
+const componentName: string | undefined = process.argv[2];
+const subdir: string = process.argv[3] ?? "ui";
 
 if (!componentName) {
   console.error("Usage: npm run generate:component <Name> [subdirectory]");
@@ -28,7 +28,8 @@ const toPascalCase = (value: string): string => {
 const pascalCase = toPascalCase(componentName);
 const className = toKebabCase(componentName);
 
-const componentDir = path.resolve(process.cwd(), "src", "components", subdir);
+const sharedDir = path.resolve(process.cwd(), "src", "shared");
+const componentDir = path.resolve(sharedDir, "components", subdir);
 
 fs.mkdirSync(componentDir, { recursive: true });
 
@@ -40,35 +41,37 @@ if (fs.existsSync(componentFile)) {
   process.exit(1);
 }
 
-const componentContent = `import { clsx } from 'clsx';
+// Load templates
+const templateDir = path.resolve(process.cwd(), "scripts", "templates", "component");
+const componentTplPath = path.join(templateDir, "Component.tsx.tpl");
+const indexTplPath = path.join(templateDir, "index.ts.tpl");
 
-interface ${pascalCase}Props {
-  className?: string;
+if (!fs.existsSync(componentTplPath) || !fs.existsSync(indexTplPath)) {
+  console.error("Template files not found in scripts/templates/component/");
+  process.exit(1);
 }
 
-export const ${pascalCase} = ({ className }: ${pascalCase}Props) => {
-  return (
-    <div className={clsx('${className}', className)}>
-      <p>${pascalCase} component</p>
-    </div>
-  );
-};
-`;
+let componentContent = fs.readFileSync(componentTplPath, "utf-8");
+componentContent = componentContent
+  .replace(/\{\{pascalCase\}\}/g, pascalCase)
+  .replace(/\{\{className\}\}/g, className);
 
 fs.writeFileSync(componentFile, componentContent, "utf-8");
 console.info(`Created: ${componentFile}`);
 
 // Append to index
-const exportLine = `export { ${pascalCase} } from './${pascalCase}';\n`;
+let indexExportLine = fs.readFileSync(indexTplPath, "utf-8");
+indexExportLine = indexExportLine.replace(/\{\{pascalCase\}\}/g, pascalCase);
+
 if (fs.existsSync(indexFile)) {
   const existing = fs.readFileSync(indexFile, "utf-8");
-  if (!existing.includes(exportLine.trim())) {
-    fs.appendFileSync(indexFile, exportLine, "utf-8");
+  if (!existing.includes(indexExportLine.trim())) {
+    fs.appendFileSync(indexFile, indexExportLine, "utf-8");
   }
 } else {
-  fs.writeFileSync(indexFile, exportLine, "utf-8");
+  fs.writeFileSync(indexFile, indexExportLine, "utf-8");
 }
 
 console.info(
-  `Component "${pascalCase}" generated in src/components/${subdir}/`,
+  `Component "${pascalCase}" generated in src/shared/components/${subdir}/`,
 );
