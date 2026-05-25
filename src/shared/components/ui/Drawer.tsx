@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { clsx } from "clsx";
+import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface DrawerProps {
   open: boolean;
@@ -20,25 +21,33 @@ export const Drawer: React.FC<DrawerProps> = ({
 
   return (
     <>
-      <div className="drawer-backdrop" onClick={onClose} role="presentation" />
       <div
-        className={clsx("drawer", className)}
+        className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm animate-in fade-in-0 duration-200"
+        onClick={onClose}
+        role="presentation"
+      />
+      <div
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-50 rounded-t-xl border bg-background p-6 text-foreground shadow-xl animate-in slide-in-from-bottom duration-300",
+          className,
+        )}
         role="dialog"
         aria-modal="true"
         aria-label={title}
       >
-        <div className="drawer__header">
-          {title && <h2 className="drawer__title">{title}</h2>}
+        <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-muted" />
+        <div className="flex items-center justify-between gap-4">
+          {title && <h2 className="text-lg font-semibold">{title}</h2>}
           <button
             type="button"
-            className="drawer__close"
+            className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={onClose}
             aria-label="Close"
           >
-            &times;
+            <X className="size-4" aria-hidden="true" />
           </button>
         </div>
-        <div className="drawer__content">{children}</div>
+        <div className="mt-4 text-sm">{children}</div>
       </div>
     </>
   );

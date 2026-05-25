@@ -1,6 +1,6 @@
 import { type InputHTMLAttributes, forwardRef } from "react";
-import { clsx } from "clsx";
 import type { SelectOption } from "@/types/common.types";
+import { cn } from "@/lib/utils";
 
 interface RadioGroupProps {
   name: string;
@@ -21,14 +21,21 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     return (
       <div
         ref={ref}
-        className={clsx("form-field", className)}
+        className={cn("grid gap-3", className)}
         role="radiogroup"
         aria-label={label}
       >
-        {label && <span className="form-label">{label}</span>}
-        <div className="radio-group">
+        {label && (
+          <span className="text-sm font-medium leading-none text-foreground">
+            {label}
+          </span>
+        )}
+        <div className="grid gap-2">
           {options.map((opt) => (
-            <label key={opt.value} className="radio-option">
+            <label
+              key={opt.value}
+              className="flex cursor-pointer items-center gap-2 rounded-md border border-transparent p-1 text-sm transition-colors hover:bg-accent disabled:cursor-not-allowed"
+            >
               <input
                 type="radio"
                 name={name}
@@ -36,14 +43,14 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
                 checked={value === opt.value}
                 onChange={onChange}
                 disabled={disabled ?? opt.disabled}
-                className="form-radio"
+                className="size-4 accent-primary"
               />
-              <span className="radio-label">{opt.label}</span>
+              <span className="text-foreground">{opt.label}</span>
             </label>
           ))}
         </div>
         {error && (
-          <span className="form-error" role="alert">
+          <span className="text-sm font-medium text-destructive" role="alert">
             {error}
           </span>
         )}

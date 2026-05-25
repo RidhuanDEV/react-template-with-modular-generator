@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { clsx } from "clsx";
+import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/Calendar";
+import { cn } from "@/lib/utils";
 
 interface DatePickerProps {
   value?: Date;
@@ -55,18 +56,22 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     : placeholder;
 
   return (
-    <div ref={ref} className={clsx("date-picker", className)}>
+    <div ref={ref} className={cn("relative inline-block", className)}>
       <button
         type="button"
-        className="date-picker__trigger"
+        className={cn(
+          "inline-flex h-10 w-full items-center justify-between gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm shadow-xs transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          !value && "text-muted-foreground",
+        )}
         onClick={toggle}
         aria-haspopup="dialog"
         aria-expanded={open}
       >
         {displayValue}
+        <CalendarIcon className="size-4" aria-hidden="true" />
       </button>
       {open && (
-        <div className="date-picker__dropdown">
+        <div className="absolute left-0 z-50 mt-2 animate-in fade-in-0 zoom-in-95 slide-in-from-top-1 duration-200">
           <Calendar
             value={value}
             onChange={handleSelect}

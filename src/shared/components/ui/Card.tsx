@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface CardProps {
   children: ReactNode;
@@ -7,17 +7,7 @@ interface CardProps {
   padding?: boolean;
 }
 
-interface CardHeaderProps {
-  children: ReactNode;
-  className?: string;
-}
-
-interface CardContentProps {
-  children: ReactNode;
-  className?: string;
-}
-
-interface CardFooterProps {
+interface CardSectionProps {
   children: ReactNode;
   className?: string;
 }
@@ -28,29 +18,45 @@ export const Card: React.FC<CardProps> = ({
   padding = true,
 }) => {
   return (
-    <div className={clsx("card", padding && "card--padded", className)}>
+    <div
+      className={cn(
+        "rounded-lg border bg-card text-card-foreground shadow-sm transition-all duration-200 ease-out",
+        padding && "p-6",
+        className,
+      )}
+    >
       {children}
     </div>
   );
 };
 
-export const CardHeader: React.FC<CardHeaderProps> = ({
+export const CardHeader: React.FC<CardSectionProps> = ({
   children,
   className,
 }) => {
-  return <div className={clsx("card__header", className)}>{children}</div>;
+  return (
+    <div className={cn("flex flex-col gap-1.5 pb-4", className)}>
+      {children}
+    </div>
+  );
 };
 
-export const CardContent: React.FC<CardContentProps> = ({
+export const CardContent: React.FC<CardSectionProps> = ({
   children,
   className,
 }) => {
-  return <div className={clsx("card__content", className)}>{children}</div>;
+  return (
+    <div className={cn("text-sm text-card-foreground", className)}>
+      {children}
+    </div>
+  );
 };
 
-export const CardFooter: React.FC<CardFooterProps> = ({
+export const CardFooter: React.FC<CardSectionProps> = ({
   children,
   className,
 }) => {
-  return <div className={clsx("card__footer", className)}>{children}</div>;
+  return (
+    <div className={cn("flex items-center pt-4", className)}>{children}</div>
+  );
 };

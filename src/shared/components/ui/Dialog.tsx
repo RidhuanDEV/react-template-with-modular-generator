@@ -1,5 +1,6 @@
 import { type ReactNode, useRef, useEffect, useCallback } from "react";
-import { clsx } from "clsx";
+import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface DialogProps {
   open: boolean;
@@ -21,9 +22,9 @@ export const Dialog: React.FC<DialogProps> = ({
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
-    if (open) {
+    if (open && !dialog.open) {
       dialog.showModal();
-    } else {
+    } else if (!open && dialog.open) {
       dialog.close();
     }
   }, [open]);
@@ -38,26 +39,29 @@ export const Dialog: React.FC<DialogProps> = ({
   return (
     <dialog
       ref={dialogRef}
-      className={clsx("dialog", className)}
+      className={cn(
+        "m-auto w-[min(92vw,32rem)] rounded-lg border bg-background p-0 text-foreground shadow-xl backdrop:bg-black/50 backdrop:backdrop-blur-sm open:animate-in open:fade-in-0 open:zoom-in-95 open:duration-200",
+        className,
+      )}
       onClick={handleBackdropClick}
       onClose={onClose}
       aria-label={title}
     >
-      <div className="dialog__panel">
+      <div className="grid gap-4 p-6">
         {title && (
-          <div className="dialog__header">
-            <h2 className="dialog__title">{title}</h2>
+          <div className="flex items-center justify-between gap-4">
+            <h2 className="text-lg font-semibold tracking-normal">{title}</h2>
             <button
               type="button"
-              className="dialog__close"
+              className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               onClick={onClose}
               aria-label="Close"
             >
-              &times;
+              <X className="size-4" aria-hidden="true" />
             </button>
           </div>
         )}
-        <div className="dialog__content">{children}</div>
+        <div className="text-sm text-foreground">{children}</div>
       </div>
     </dialog>
   );

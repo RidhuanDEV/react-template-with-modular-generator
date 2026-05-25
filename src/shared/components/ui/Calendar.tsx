@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface CalendarProps {
   value?: Date;
@@ -49,31 +49,35 @@ export const Calendar: React.FC<CalendarProps> = ({
   };
 
   return (
-    <div className={clsx("calendar", className)}>
-      <div className="calendar__header">
-        <span className="calendar__month-year">
+    <div className={cn("w-72 rounded-md border bg-popover p-3", className)}>
+      <div className="mb-3 flex items-center justify-center">
+        <span className="text-sm font-medium text-popover-foreground">
           {displayDate.toLocaleDateString("en-US", {
             month: "long",
             year: "numeric",
           })}
         </span>
       </div>
-      <div className="calendar__grid">
+      <div className="grid grid-cols-7 gap-1 text-center">
         {DAYS.map((day) => (
-          <div key={day} className="calendar__day-header">
+          <div
+            key={day}
+            className="flex size-8 items-center justify-center text-xs font-medium text-muted-foreground"
+          >
             {day}
           </div>
         ))}
         {Array.from({ length: firstDay }).map((_, i) => (
-          <div key={`empty-${String(i)}`} className="calendar__empty" />
+          <div key={`empty-${String(i)}`} className="size-8" />
         ))}
         {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => (
           <button
             key={day}
             type="button"
-            className={clsx(
-              "calendar__day",
-              isSelected(day) && "calendar__day--selected",
+            className={cn(
+              "inline-flex size-8 items-center justify-center rounded-md text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40",
+              isSelected(day) &&
+                "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground",
             )}
             disabled={isDisabled(day)}
             onClick={() => onChange?.(new Date(year, month, day))}

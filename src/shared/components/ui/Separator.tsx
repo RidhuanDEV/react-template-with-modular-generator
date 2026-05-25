@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface SeparatorProps {
   orientation?: "horizontal" | "vertical";
@@ -11,7 +11,11 @@ export const Separator: React.FC<SeparatorProps> = ({
 }) => {
   return (
     <div
-      className={clsx("separator", `separator--${orientation}`, className)}
+      className={cn(
+        "shrink-0 bg-border",
+        orientation === "horizontal" ? "h-px w-full" : "h-full w-px",
+        className,
+      )}
       role="separator"
       aria-orientation={orientation}
     />

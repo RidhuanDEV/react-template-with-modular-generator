@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from "react";
-import { clsx } from "clsx";
+import { UploadCloud } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface FileUploadProps {
   accept?: string;
@@ -62,15 +63,13 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   );
 
   return (
-    <div
-      className={clsx(
-        "file-upload",
-        dragActive && "file-upload--active",
-        className,
-      )}
-    >
+    <div className={cn("grid gap-2", className)}>
       <div
-        className="file-upload__dropzone"
+        className={cn(
+          "flex min-h-32 cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-input bg-background p-6 text-center transition-all duration-200 hover:border-primary/50 hover:bg-accent/50",
+          dragActive && "border-primary bg-accent",
+          disabled && "pointer-events-none opacity-50",
+        )}
         onDragOver={(e) => {
           e.preventDefault();
           setDragActive(true);
@@ -84,20 +83,26 @@ export const FileUpload: React.FC<FileUploadProps> = ({
           if (e.key === "Enter") inputRef.current?.click();
         }}
       >
-        <p className="file-upload__label">{label}</p>
+        <UploadCloud
+          className="size-8 text-muted-foreground"
+          aria-hidden="true"
+        />
+        <p className="text-sm font-medium text-foreground">{label}</p>
         <input
           ref={inputRef}
           type="file"
           accept={accept}
           multiple={multiple}
           disabled={disabled}
-          className="file-upload__input"
+          className="sr-only"
           onChange={(e) => {
             if (e.target.files) handleFiles(e.target.files);
           }}
         />
       </div>
-      {error && <span className="form-error">{error}</span>}
+      {error && (
+        <span className="text-sm font-medium text-destructive">{error}</span>
+      )}
     </div>
   );
 };

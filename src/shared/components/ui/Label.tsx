@@ -1,5 +1,5 @@
 import { type LabelHTMLAttributes, forwardRef } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   required?: boolean;
@@ -8,9 +8,16 @@ interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(
   ({ required, className, children, ...props }, ref) => {
     return (
-      <label ref={ref} className={clsx("form-label", className)} {...props}>
+      <label
+        ref={ref}
+        className={cn(
+          "text-sm font-medium leading-none text-foreground",
+          className,
+        )}
+        {...props}
+      >
         {children}
-        {required && <span className="form-label__required"> *</span>}
+        {required && <span className="text-destructive"> *</span>}
       </label>
     );
   },

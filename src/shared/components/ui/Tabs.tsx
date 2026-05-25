@@ -4,7 +4,7 @@ import {
   useCallback,
   type KeyboardEvent,
 } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface Tab {
   id: string;
@@ -58,8 +58,11 @@ export const Tabs: React.FC<TabsProps> = ({
   const activeContent = tabs.find((t) => t.id === activeTab)?.content;
 
   return (
-    <div className={clsx("tabs", className)}>
-      <div className="tabs__list" role="tablist">
+    <div className={cn("grid gap-4", className)}>
+      <div
+        className="inline-flex h-10 items-center justify-start rounded-md bg-muted p-1 text-muted-foreground"
+        role="tablist"
+      >
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
@@ -67,9 +70,9 @@ export const Tabs: React.FC<TabsProps> = ({
             role="tab"
             aria-selected={activeTab === tab.id}
             aria-controls={`tabpanel-${tab.id}`}
-            className={clsx(
-              "tabs__trigger",
-              activeTab === tab.id && "tabs__trigger--active",
+            className={cn(
+              "inline-flex h-8 items-center justify-center whitespace-nowrap rounded-sm px-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+              activeTab === tab.id && "bg-background text-foreground shadow-sm",
             )}
             onClick={() => handleTabClick(tab.id)}
             onKeyDown={(e) => handleKeyDown(e, index)}
@@ -82,7 +85,7 @@ export const Tabs: React.FC<TabsProps> = ({
       <div
         id={`tabpanel-${activeTab}`}
         role="tabpanel"
-        className="tabs__content"
+        className="text-sm animate-in fade-in-0 slide-in-from-bottom-1 duration-200"
         aria-labelledby={activeTab}
       >
         {activeContent}

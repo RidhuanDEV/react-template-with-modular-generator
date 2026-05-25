@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { clsx } from "clsx";
 import type { TableColumn } from "@/types/common.types";
+import { cn } from "@/lib/utils";
 
 interface TableProps<T extends object> {
   data: T[];
@@ -34,50 +34,58 @@ export const Table = <T extends object>({
   const resolveRowId = getRowId ?? getDefaultRowId;
 
   return (
-    <div className={clsx("table-wrapper", className)}>
-      <table className="table">
-        <thead className="table__head">
-          <tr>
-            {columns.map((col) => (
-              <th key={col.key} className="table__th">
-                {col.header}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody className="table__body">
-          {data.length === 0 ? (
+    <div className={cn("overflow-hidden rounded-lg border bg-card", className)}>
+      <div className="overflow-x-auto">
+        <table className="w-full caption-bottom text-sm">
+          <thead className="border-b bg-muted/50">
             <tr>
-              <td colSpan={columns.length} className="table__empty">
-                {emptyMessage}
-              </td>
+              {columns.map((col) => (
+                <th
+                  key={col.key}
+                  className="h-11 px-4 text-left align-middle font-medium text-muted-foreground"
+                >
+                  {col.header}
+                </th>
+              ))}
             </tr>
-          ) : (
-            data.map((row, rowIndex) => (
-              <tr
-                key={resolveRowId(row, rowIndex)}
-                className={clsx(
-                  "table__row",
-                  onRowClick && "table__row--clickable",
-                )}
-                onClick={() => onRowClick?.(row)}
-              >
-                {columns.map((col) => {
-                  const value = row[col.key];
-
-                  return (
-                    <td key={col.key} className="table__td">
-                      {col.render
-                        ? col.render(value, row)
-                        : String(value ?? "")}
-                    </td>
-                  );
-                })}
+          </thead>
+          <tbody className="divide-y divide-border">
+            {data.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={columns.length}
+                  className="h-24 px-4 text-center text-muted-foreground"
+                >
+                  {emptyMessage}
+                </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              data.map((row, rowIndex) => (
+                <tr
+                  key={resolveRowId(row, rowIndex)}
+                  className={cn(
+                    "transition-colors duration-150",
+                    onRowClick && "cursor-pointer hover:bg-muted/50",
+                  )}
+                  onClick={() => onRowClick?.(row)}
+                >
+                  {columns.map((col) => {
+                    const value = row[col.key];
+
+                    return (
+                      <td key={col.key} className="px-4 py-3 align-middle">
+                        {col.render
+                          ? col.render(value, row)
+                          : String(value ?? "")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

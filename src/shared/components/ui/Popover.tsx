@@ -5,7 +5,7 @@ import {
   useCallback,
   useEffect,
 } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface PopoverProps {
   trigger: ReactNode;
@@ -38,19 +38,21 @@ export const Popover: React.FC<PopoverProps> = ({
   }, []);
 
   return (
-    <div ref={ref} className={clsx("popover", className)}>
-      <div
-        className="popover__trigger"
+    <div ref={ref} className={cn("relative inline-block", className)}>
+      <button
+        type="button"
+        className="inline-flex items-center"
         onClick={toggle}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") toggle();
-        }}
+        aria-haspopup="dialog"
+        aria-expanded={open}
       >
         {trigger}
-      </div>
-      {open && <div className="popover__content">{children}</div>}
+      </button>
+      {open && (
+        <div className="absolute left-0 z-50 mt-2 w-72 rounded-md border bg-popover p-4 text-sm text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 slide-in-from-top-1 duration-200">
+          {children}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,33 +1,55 @@
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
-type AvatarSize = "sm" | "md" | "lg" | "xl";
+type AvatarSize = "sm" | "md" | "lg";
 
 interface AvatarProps {
   src?: string;
-  alt: string;
+  alt?: string;
   size?: AvatarSize;
-  fallback?: string;
+  name?: string;
   className?: string;
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
   src,
-  alt,
+  alt = "",
   size = "md",
-  fallback,
+  name,
   className,
 }) => {
-  const initials = fallback ?? alt.charAt(0).toUpperCase();
+  const initials = name
+    ? name
+        .split(" ")
+        .map((part) => part[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase()
+    : "?";
+  const sizeClass = {
+    sm: "size-8 text-xs",
+    md: "size-10 text-sm",
+    lg: "size-12 text-base",
+  } satisfies Record<AvatarSize, string>;
 
   return (
     <div
-      className={clsx("avatar", `avatar--${size}`, className)}
-      aria-label={alt}
+      className={cn(
+        "relative flex shrink-0 overflow-hidden rounded-full border bg-muted text-muted-foreground shadow-xs",
+        sizeClass[size],
+        className,
+      )}
+      title={name}
     >
       {src ? (
-        <img src={src} alt={alt} className="avatar__image" />
+        <img
+          src={src}
+          alt={alt}
+          className="aspect-square size-full object-cover"
+        />
       ) : (
-        <span className="avatar__fallback">{initials}</span>
+        <span className="flex size-full items-center justify-center font-medium">
+          {initials}
+        </span>
       )}
     </div>
   );

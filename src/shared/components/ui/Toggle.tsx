@@ -1,12 +1,33 @@
 import { type ButtonHTMLAttributes, forwardRef } from "react";
-import { clsx } from "clsx";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-type ToggleVariant = "default" | "outline";
+const toggleVariants = cva(
+  "inline-flex h-9 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "",
+        outline: "border border-input bg-background shadow-xs hover:bg-accent",
+      },
+      pressed: {
+        true: "bg-accent text-accent-foreground",
+        false: "",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      pressed: false,
+    },
+  },
+);
 
-interface ToggleProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ToggleProps
+  extends
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof toggleVariants> {
   pressed?: boolean;
   onPressedChange?: (pressed: boolean) => void;
-  variant?: ToggleVariant;
 }
 
 export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
@@ -17,6 +38,7 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
       variant = "default",
       className,
       children,
+      onClick,
       ...props
     },
     ref,
@@ -25,15 +47,12 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
       <button
         ref={ref}
         type="button"
-        role="switch"
-        aria-checked={pressed}
-        className={clsx(
-          "toggle",
-          `toggle--${variant}`,
-          pressed && "toggle--pressed",
-          className,
-        )}
-        onClick={() => onPressedChange?.(!pressed)}
+        aria-pressed={pressed}
+        className={cn(toggleVariants({ variant, pressed }), className)}
+        onClick={(event) => {
+          onClick?.(event);
+          onPressedChange?.(!pressed);
+        }}
         {...props}
       >
         {children}

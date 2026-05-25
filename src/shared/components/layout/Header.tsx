@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
+import { LogOut, Menu, Moon, Sun } from "lucide-react";
 import { useUIStore } from "@/store/ui.store";
 import { useAuthStore } from "@/store/auth.store";
 import { useLogout } from "@/features/auth/hooks/useAuth";
+import { Button } from "@/components/ui/Button";
 
 export const Header: React.FC = () => {
   const { theme, toggleTheme, toggleSidebar } = useUIStore();
   const user = useAuthStore((state) => state.user);
   const logoutMutation = useLogout();
 
-  // Dynamically update document data-theme for css styles
   useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
@@ -18,50 +20,68 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <div className="layout-header">
-      <div className="layout-header__left">
-        <button
+    <div className="flex h-16 items-center justify-between gap-4 px-4 md:px-6">
+      <div className="flex items-center gap-2">
+        <Button
           type="button"
-          className="layout-header__toggle"
+          variant="ghost"
+          size="sm"
           onClick={toggleSidebar}
           aria-label="Toggle sidebar"
         >
-          ☰
-        </button>
+          <Menu className="size-4" aria-hidden="true" />
+        </Button>
       </div>
 
-      <div className="layout-header__right">
-        <button
+      <div className="flex items-center gap-2 md:gap-4">
+        <Button
           type="button"
-          className="layout-header__theme-toggle"
+          variant="outline"
+          size="sm"
           onClick={toggleTheme}
           aria-label="Toggle theme"
         >
-          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-        </button>
+          {theme === "light" ? (
+            <Moon className="size-4" aria-hidden="true" />
+          ) : (
+            <Sun className="size-4" aria-hidden="true" />
+          )}
+          <span className="hidden sm:inline">
+            {theme === "light" ? "Dark" : "Light"}
+          </span>
+        </Button>
 
         {user && (
-          <div className="layout-header__user">
-            <span className="layout-header__user-avatar">
+          <div className="hidden items-center gap-3 border-l pl-4 sm:flex">
+            <span className="flex size-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground shadow-sm">
               {user.name.charAt(0).toUpperCase()}
             </span>
-            <div className="layout-header__user-info">
-              <span className="layout-header__user-name">{user.name}</span>
-              <span className="layout-header__user-role">
+            <div className="grid leading-tight">
+              <span className="text-sm font-semibold text-foreground">
+                {user.name}
+              </span>
+              <span className="text-xs text-muted-foreground">
                 {user.permissions.includes("admin") ? "Administrator" : "User"}
               </span>
             </div>
           </div>
         )}
 
-        <button
+        <Button
           type="button"
-          className="layout-header__logout"
+          variant="outline"
+          size="sm"
           onClick={handleLogout}
           disabled={logoutMutation.isPending}
+          loading={logoutMutation.isPending}
         >
-          {logoutMutation.isPending ? "Logging out..." : "Logout"}
-        </button>
+          {!logoutMutation.isPending && (
+            <LogOut className="size-4" aria-hidden="true" />
+          )}
+          <span className="hidden sm:inline">
+            {logoutMutation.isPending ? "Logging out..." : "Logout"}
+          </span>
+        </Button>
       </div>
     </div>
   );

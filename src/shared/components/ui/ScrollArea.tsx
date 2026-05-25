@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface ScrollAreaProps {
   children: ReactNode;
@@ -14,8 +14,8 @@ export const ScrollArea: React.FC<ScrollAreaProps> = ({
 }) => {
   return (
     <div
-      className={clsx("scroll-area", className)}
-      style={{ maxHeight, overflow: "auto" }}
+      className={cn("overflow-auto rounded-md", className)}
+      style={{ maxHeight }}
     >
       {children}
     </div>

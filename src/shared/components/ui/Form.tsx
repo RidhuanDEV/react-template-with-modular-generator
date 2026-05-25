@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface FormProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -13,7 +13,11 @@ export const Form: React.FC<FormProps> = ({
   className,
 }) => {
   return (
-    <form onSubmit={onSubmit} className={clsx("form", className)} noValidate>
+    <form
+      onSubmit={onSubmit}
+      className={cn("grid gap-4", className)}
+      noValidate
+    >
       {children}
     </form>
   );
@@ -39,21 +43,22 @@ export const FormFieldWrapper: React.FC<FormFieldWrapperProps> = ({
   htmlFor,
 }) => {
   return (
-    <div
-      className={clsx("form-field", error && "form-field--error", className)}
-    >
+    <div className={cn("grid gap-2", className)}>
       {label && (
-        <label htmlFor={htmlFor} className="form-label">
+        <label
+          htmlFor={htmlFor}
+          className="text-sm font-medium leading-none text-foreground"
+        >
           {label}
-          {required && <span className="form-label__required"> *</span>}
+          {required && <span className="text-destructive"> *</span>}
         </label>
       )}
       {children}
       {description && !error && (
-        <p className="form-description">{description}</p>
+        <p className="text-sm text-muted-foreground">{description}</p>
       )}
       {error && (
-        <span className="form-error" role="alert">
+        <span className="text-sm font-medium text-destructive" role="alert">
           {error}
         </span>
       )}

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import { clsx } from "clsx";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import type { BreadcrumbItem } from "@/types/common.types";
+import { cn } from "@/lib/utils";
 
 interface PageHeaderProps {
   title: string;
@@ -19,18 +19,24 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   className,
 }) => {
   return (
-    <div className={clsx("page-header", className)}>
+    <div className={cn("grid gap-4", className)}>
       {breadcrumbs && breadcrumbs.length > 0 && (
         <Breadcrumb items={breadcrumbs} />
       )}
-      <div className="page-header__row">
-        <div className="page-header__text">
-          <h1 className="page-header__title">{title}</h1>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="grid gap-1">
+          <h1 className="text-2xl font-semibold tracking-normal text-foreground">
+            {title}
+          </h1>
           {description && (
-            <p className="page-header__description">{description}</p>
+            <p className="max-w-2xl text-sm text-muted-foreground">
+              {description}
+            </p>
           )}
         </div>
-        {actions && <div className="page-header__actions">{actions}</div>}
+        {actions && (
+          <div className="flex shrink-0 items-center gap-2">{actions}</div>
+        )}
       </div>
     </div>
   );

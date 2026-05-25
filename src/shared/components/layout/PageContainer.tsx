@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface PageContainerProps {
   children: ReactNode;
@@ -12,11 +12,19 @@ export const PageContainer: React.FC<PageContainerProps> = ({
   className,
   maxWidth = "xl",
 }) => {
+  const maxWidthClass = {
+    sm: "max-w-screen-sm",
+    md: "max-w-screen-md",
+    lg: "max-w-screen-lg",
+    xl: "max-w-screen-xl",
+    full: "max-w-none",
+  } satisfies Record<NonNullable<PageContainerProps["maxWidth"]>, string>;
+
   return (
     <div
-      className={clsx(
-        "page-container",
-        `page-container--${maxWidth}`,
+      className={cn(
+        "mx-auto grid w-full gap-6",
+        maxWidthClass[maxWidth],
         className,
       )}
     >

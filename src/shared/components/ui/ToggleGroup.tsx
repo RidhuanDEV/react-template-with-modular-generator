@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface ToggleGroupItem {
   value: string;
@@ -32,14 +32,21 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = ({
   );
 
   return (
-    <div className={clsx("toggle-group", className)} role="group">
+    <div
+      className={cn(
+        "inline-flex rounded-md border bg-background p-1",
+        className,
+      )}
+      role="group"
+    >
       {items.map((item) => (
         <button
           key={item.value}
           type="button"
-          className={clsx(
-            "toggle-group__item",
-            activeValue === item.value && "toggle-group__item--active",
+          className={cn(
+            "inline-flex h-8 items-center justify-center rounded-sm px-3 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+            activeValue === item.value &&
+              "bg-primary text-primary-foreground shadow-sm",
           )}
           disabled={item.disabled}
           onClick={() => handleChange(item.value)}

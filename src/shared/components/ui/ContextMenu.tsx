@@ -5,7 +5,7 @@ import {
   useEffect,
   useCallback,
 } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface ContextMenuItem {
   label: string;
@@ -53,13 +53,13 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
   return (
     <div
       ref={ref}
-      className={clsx("context-menu-trigger", className)}
+      className={cn("contents", className)}
       onContextMenu={handleContextMenu}
     >
       {children}
       {open && (
         <div
-          className="context-menu"
+          className="z-50 min-w-44 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 duration-150"
           style={{ position: "fixed", left: position.x, top: position.y }}
           role="menu"
         >
@@ -68,7 +68,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
               key={item.label}
               type="button"
               role="menuitem"
-              className="context-menu__item"
+              className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
               disabled={item.disabled}
               onClick={() => {
                 item.onClick();
@@ -76,7 +76,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
               }}
             >
               {item.icon && (
-                <span className="context-menu__icon">{item.icon}</span>
+                <span className="size-4 shrink-0">{item.icon}</span>
               )}
               {item.label}
             </button>

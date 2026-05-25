@@ -5,7 +5,7 @@ import {
   useEffect,
   useCallback,
 } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface DropdownItem {
   label: string;
@@ -46,33 +46,36 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
   }, [close]);
 
   return (
-    <div ref={ref} className={clsx("dropdown", className)}>
-      <div
-        className="dropdown__trigger"
+    <div ref={ref} className={cn("relative inline-block text-left", className)}>
+      <button
+        type="button"
+        className="inline-flex items-center"
         onClick={toggle}
-        role="button"
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") toggle();
-        }}
+        aria-haspopup="menu"
+        aria-expanded={open}
       >
         {trigger}
-      </div>
+      </button>
       {open && (
-        <div className="dropdown__menu" role="menu">
+        <div
+          className="absolute right-0 z-50 mt-2 min-w-44 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95 slide-in-from-top-1 duration-200"
+          role="menu"
+        >
           {items.map((item) => (
             <button
               key={item.label}
               type="button"
               role="menuitem"
-              className="dropdown__item"
+              className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
               disabled={item.disabled}
               onClick={() => {
                 item.onClick();
                 close();
               }}
             >
-              {item.icon && <span className="dropdown__icon">{item.icon}</span>}
+              {item.icon && (
+                <span className="size-4 shrink-0">{item.icon}</span>
+              )}
               {item.label}
             </button>
           ))}

@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface ProgressProps {
   value: number;
@@ -16,17 +16,19 @@ export const Progress: React.FC<ProgressProps> = ({
   const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
 
   return (
-    <div className={clsx("progress", className)}>
-      {label && <span className="progress__label">{label}</span>}
+    <div className={cn("grid gap-2", className)}>
+      {label && (
+        <span className="text-sm font-medium text-foreground">{label}</span>
+      )}
       <div
-        className="progress__track"
+        className="relative h-2 w-full overflow-hidden rounded-full bg-secondary"
         role="progressbar"
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={max}
       >
         <div
-          className="progress__fill"
+          className="h-full rounded-full bg-primary transition-all duration-300 ease-out"
           style={{ width: `${String(percentage)}%` }}
         />
       </div>

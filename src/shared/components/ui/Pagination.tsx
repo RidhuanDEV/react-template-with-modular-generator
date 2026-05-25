@@ -1,4 +1,5 @@
-import { clsx } from "clsx";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface PaginationProps {
   currentPage: number;
@@ -14,25 +15,35 @@ export const Pagination: React.FC<PaginationProps> = ({
   className,
 }) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const pageButtonClass =
+    "inline-flex size-9 items-center justify-center rounded-md border border-input bg-background text-sm font-medium shadow-xs transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
 
   return (
-    <nav className={clsx("pagination", className)} aria-label="Pagination">
+    <nav
+      className={cn(
+        "flex flex-wrap items-center justify-center gap-2",
+        className,
+      )}
+      aria-label="Pagination"
+    >
       <button
         type="button"
-        className="pagination__btn"
+        className={pageButtonClass}
         disabled={currentPage <= 1}
         onClick={() => onPageChange(currentPage - 1)}
+        aria-label="Previous page"
       >
-        Previous
+        <ChevronLeft className="size-4" aria-hidden="true" />
       </button>
-      <div className="pagination__pages">
+      <div className="flex items-center gap-1">
         {pages.map((page) => (
           <button
             key={page}
             type="button"
-            className={clsx(
-              "pagination__page",
-              page === currentPage && "pagination__page--active",
+            className={cn(
+              pageButtonClass,
+              page === currentPage &&
+                "border-primary bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground",
             )}
             onClick={() => onPageChange(page)}
             aria-current={page === currentPage ? "page" : undefined}
@@ -43,11 +54,12 @@ export const Pagination: React.FC<PaginationProps> = ({
       </div>
       <button
         type="button"
-        className="pagination__btn"
+        className={pageButtonClass}
         disabled={currentPage >= totalPages}
         onClick={() => onPageChange(currentPage + 1)}
+        aria-label="Next page"
       >
-        Next
+        <ChevronRight className="size-4" aria-hidden="true" />
       </button>
     </nav>
   );

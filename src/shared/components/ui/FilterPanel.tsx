@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { clsx } from "clsx";
 import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
 
 interface FilterOption {
   key: string;
@@ -22,16 +22,18 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   className,
 }) => {
   return (
-    <div className={clsx("filter-panel", className)}>
-      <div className="filter-panel__filters">
+    <div className={cn("rounded-lg border bg-card p-4 shadow-sm", className)}>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filters.map((filter) => (
-          <div key={filter.key} className="filter-panel__item">
-            <label className="form-label">{filter.label}</label>
+          <div key={filter.key} className="grid gap-2">
+            <label className="text-sm font-medium text-foreground">
+              {filter.label}
+            </label>
             {filter.render()}
           </div>
         ))}
       </div>
-      <div className="filter-panel__actions">
+      <div className="mt-4 flex flex-wrap justify-end gap-2">
         <Button variant="outline" onClick={onReset} size="sm">
           Reset
         </Button>

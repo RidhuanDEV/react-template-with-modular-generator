@@ -1,8 +1,9 @@
 import { type ReactNode, useState, useCallback, useMemo } from "react";
-import { clsx } from "clsx";
+import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
 import { Pagination } from "@/components/ui/Pagination";
 import { Skeleton } from "@/components/ui/Skeleton";
 import type { TableColumn } from "@/types/common.types";
+import { cn } from "@/lib/utils";
 
 type SortableValue = string | number | boolean | Date | null | undefined;
 
@@ -118,7 +119,9 @@ export const DataTable = <T extends object>({
 
   if (loading) {
     return (
-      <div className={clsx("data-table", className)}>
+      <div
+        className={cn("grid gap-3 rounded-lg border bg-card p-4", className)}
+      >
         {Array.from({ length: 5 }).map((_, i) => (
           <Skeleton key={i} height="40px" variant="rectangular" />
         ))}
@@ -127,70 +130,92 @@ export const DataTable = <T extends object>({
   }
 
   return (
-    <div className={clsx("data-table", className)}>
-      <div className="table-wrapper">
-        <table className="table">
-          <thead className="table__head">
-            <tr>
-              {columns.map((col) => (
-                <th
-                  key={col.key}
-                  className={clsx(
-                    "table__th",
-                    col.sortable && "table__th--sortable",
-                  )}
-                  onClick={col.sortable ? () => handleSort(col.key) : undefined}
-                  aria-sort={
-                    sortKey === col.key
-                      ? sortOrder === "asc"
-                        ? "ascending"
-                        : "descending"
-                      : undefined
-                  }
-                >
-                  {col.header}
-                  {col.sortable && sortKey === col.key && (
-                    <span className="table__sort-icon">
-                      {sortOrder === "asc" ? " ↑" : " ↓"}
-                    </span>
-                  )}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="table__body">
-            {sortedData.length === 0 ? (
+    <div className={cn("grid gap-4", className)}>
+      <div className="overflow-hidden rounded-lg border bg-card shadow-sm">
+        <div className="overflow-x-auto">
+          <table className="w-full caption-bottom text-sm">
+            <thead className="border-b bg-muted/50">
               <tr>
-                <td colSpan={columns.length} className="table__empty">
-                  {emptyMessage}
-                </td>
-              </tr>
-            ) : (
-              sortedData.map((row, i) => (
-                <tr
-                  key={resolveRowId(row, i)}
-                  className={clsx(
-                    "table__row",
-                    onRowClick && "table__row--clickable",
-                  )}
-                  onClick={() => onRowClick?.(row)}
-                >
-                  {columns.map((col) => {
-                    const value = row[col.key];
+                {columns.map((col) => {
+                  const active = sortKey === col.key;
+                  const SortIcon = active
+                    ? sortOrder === "asc"
+                      ? ArrowUp
+                      : ArrowDown
+                    : ChevronsUpDown;
 
-                    return (
-                      <td key={col.key} className="table__td">
-                        {col.render
-                          ? col.render(value, row)
-                          : String(value ?? "")}
-                      </td>
-                    );
-                  })}
+                  return (
+                    <th
+                      key={col.key}
+                      className={cn(
+                        "h-11 px-4 text-left align-middle font-medium text-muted-foreground",
+                        col.sortable && "cursor-pointer select-none",
+                      )}
+                      onClick={
+                        col.sortable ? () => handleSort(col.key) : undefined
+                      }
+                      aria-sort={
+                        active
+                          ? sortOrder === "asc"
+                            ? "ascending"
+                            : "descending"
+                          : undefined
+                      }
+                    >
+                      <span className="inline-flex items-center gap-2">
+                        {col.header}
+                        {col.sortable && (
+                          <SortIcon
+                            className={cn(
+                              "size-3.5",
+                              active && "text-foreground",
+                            )}
+                            aria-hidden="true"
+                          />
+                        )}
+                      </span>
+                    </th>
+                  );
+                })}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {sortedData.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={columns.length}
+                    className="h-24 px-4 text-center text-muted-foreground"
+                  >
+                    {emptyMessage}
+                  </td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ) : (
+                sortedData.map((row, i) => (
+                  <tr
+                    key={resolveRowId(row, i)}
+                    className={cn(
+                      "transition-colors duration-150",
+                      onRowClick && "cursor-pointer hover:bg-muted/50",
+                    )}
+                    onClick={() => onRowClick?.(row)}
+                  >
+                    {columns.map((col) => {
+                      const value = row[col.key];
+
+                      return (
+                        <td key={col.key} className="px-4 py-3 align-middle">
+                          {col.render
+                            ? col.render(value, row)
+                            : String(value ?? "")}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
       {totalPages > 1 && onPageChange && (
         <Pagination

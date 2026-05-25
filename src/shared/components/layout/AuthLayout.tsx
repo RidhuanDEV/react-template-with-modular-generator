@@ -10,8 +10,8 @@ export const AuthLayout: React.FC = () => {
   }
 
   return (
-    <div className="auth-layout">
-      <div className="auth-layout__container">
+    <div className="min-h-svh bg-background">
+      <div className="min-h-svh">
         <Outlet />
       </div>
     </div>

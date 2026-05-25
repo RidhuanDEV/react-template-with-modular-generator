@@ -27,11 +27,13 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <Card className="login-form-card">
+    <Card className="shadow-xl shadow-primary/5">
       <CardHeader>
-        <div>
-          <h2>Sign in</h2>
-          <p>Use your company account to access the dashboard.</p>
+        <div className="grid gap-1">
+          <h2 className="text-lg font-semibold text-foreground">Sign in</h2>
+          <p className="text-sm text-muted-foreground">
+            Use your company account to access the dashboard.
+          </p>
         </div>
       </CardHeader>
       <CardContent>
@@ -39,7 +41,7 @@ export const LoginForm: React.FC = () => {
           onSubmit={(event) => {
             void handleSubmit(onSubmit)(event);
           }}
-          className="login-form"
+          className="grid gap-4"
         >
           <Input
             id="email"

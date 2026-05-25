@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 
 interface FormFieldProps {
   label: string;
@@ -21,19 +21,20 @@ export const FormField: React.FC<FormFieldProps> = ({
   htmlFor,
 }) => {
   return (
-    <div
-      className={clsx("form-field", error && "form-field--error", className)}
-    >
-      <label htmlFor={htmlFor} className="form-label">
+    <div className={cn("grid gap-2", className)}>
+      <label
+        htmlFor={htmlFor}
+        className="text-sm font-medium leading-none text-foreground"
+      >
         {label}
-        {required && <span className="form-label__required"> *</span>}
+        {required && <span className="text-destructive"> *</span>}
       </label>
       {children}
       {description && !error && (
-        <p className="form-description">{description}</p>
+        <p className="text-sm text-muted-foreground">{description}</p>
       )}
       {error && (
-        <span className="form-error" role="alert">
+        <span className="text-sm font-medium text-destructive" role="alert">
           {error}
         </span>
       )}
