@@ -1,0 +1,13 @@
+﻿{
+  "title": "Dashboard",
+  "subtitle": "A clean React starter with strict contracts, modular generators, and a shadcn-ready design foundation.",
+  "badge": "Modern template",
+  "tailwindNative": "Tailwind native",
+  "tailwindNativeDesc": "Components rely on utility classes and theme tokens instead of legacy CSS selectors.",
+  "strictContracts": "Strict contracts",
+  "strictContractsDesc": "The template keeps strictly typed component props and avoids loose assumptions.",
+  "modularBase": "Modular base",
+  "modularBaseDesc": "Shared UI, layout, feedback, and feature scaffolds stay organized for generated modules.",
+  "i18nReady": "i18n Multi-Language",
+  "i18nReadyDesc": "Full enterprise internationalization support with instant language switching between English and Indonesian."
+}

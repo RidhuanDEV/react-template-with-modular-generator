@@ -1,0 +1,13 @@
+﻿{
+  "title": "Dasbor",
+  "subtitle": "Starter React modern dengan kontrak ketat, generator modular, dan fondasi desain shadcn kelas atas.",
+  "badge": "Template modern",
+  "tailwindNative": "Native Tailwind CSS",
+  "tailwindNativeDesc": "Komponen menggunakan class utility dan token tema Tailwind v4 terkini.",
+  "strictContracts": "Kontrak Tipe Ketat",
+  "strictContractsDesc": "Template menjaga kepatuhan TypeScript ketat tanpa loose typing atau type assertion yang tidak aman.",
+  "modularBase": "Fondasi Modular",
+  "modularBaseDesc": "Shared UI, layout, feedback, dan modul domain terstruktur rapi untuk kemudahan skalabilitas.",
+  "i18nReady": "Mendukung i18n Multi-Bahasa",
+  "i18nReadyDesc": "Dukungan internasionalisasi enterprise dengan pertukaran bahasa instan antara English dan Bahasa Indonesia."
+}
