@@ -1,9 +1,17 @@
-export const ROUTES = {
+﻿export const ROUTES = {
   HOME: "/",
   LOGIN: "/login",
+  REGISTER: "/register",
+  FORGOT_PASSWORD: "/forgot-password",
+  RESET_PASSWORD: "/reset-password",
+  VERIFY_EMAIL: "/verify-email",
+  CONFIRM_PASSWORD: "/confirm-password",
   DASHBOARD: "/dashboard",
-  PROFILE: "/profile",
   SETTINGS: "/settings",
+  PROFILE: "/settings/profile",
+  SETTINGS_PROFILE: "/settings/profile",
+  SETTINGS_APPEARANCE: "/settings/appearance",
+  SETTINGS_SECURITY: "/settings/security",
   UNAUTHORIZED: "/unauthorized",
   NOT_FOUND: "*",
 } as const;
