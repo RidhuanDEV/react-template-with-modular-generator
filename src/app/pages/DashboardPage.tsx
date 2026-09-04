@@ -1,38 +1,45 @@
-import React from "react";
-import { ArrowUpRight, Blocks, Code2, Sparkles } from "lucide-react";
+﻿import React from "react";
+import { useTranslation } from "react-i18next";
+import { ArrowUpRight, Blocks, Code2, Globe2, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { PageContainer, PageHeader } from "@/components/layout";
 
 const DashboardPage: React.FC = () => {
+  const { t } = useTranslation(["dashboard", "common"]);
+
+  const featureCards = [
+    {
+      title: t("dashboard:tailwindNative"),
+      description: t("dashboard:tailwindNativeDesc"),
+      icon: Sparkles,
+    },
+    {
+      title: t("dashboard:strictContracts"),
+      description: t("dashboard:strictContractsDesc"),
+      icon: Code2,
+    },
+    {
+      title: t("dashboard:modularBase"),
+      description: t("dashboard:modularBaseDesc"),
+      icon: Blocks,
+    },
+    {
+      title: t("dashboard:i18nReady"),
+      description: t("dashboard:i18nReadyDesc"),
+      icon: Globe2,
+    },
+  ];
+
   return (
     <PageContainer>
       <PageHeader
-        title="Dashboard"
-        description="A clean React starter with strict contracts, modular generators, and a shadcn-ready design foundation."
-        actions={<Badge variant="primary">Modern template</Badge>}
+        title={t("dashboard:title")}
+        description={t("dashboard:subtitle")}
+        actions={<Badge variant="primary">{t("dashboard:badge")}</Badge>}
       />
-      <div className="grid gap-4 md:grid-cols-3">
-        {[
-          {
-            title: "Tailwind native",
-            description:
-              "Components now rely on utility classes and shadcn theme tokens instead of legacy CSS selectors.",
-            icon: Sparkles,
-          },
-          {
-            title: "Strict contracts",
-            description:
-              "The template keeps typed component props and avoids loose compatibility assumptions.",
-            icon: Code2,
-          },
-          {
-            title: "Modular base",
-            description:
-              "Shared UI, layout, feedback, and feature scaffolds stay organized for generated modules.",
-            icon: Blocks,
-          },
-        ].map((item) => {
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {featureCards.map((item) => {
           const Icon = item.icon;
 
           return (
