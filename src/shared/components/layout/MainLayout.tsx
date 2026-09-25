@@ -21,7 +21,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ sidebar, header }) => {
       <div
         className={cn(
           "grid min-h-0 transition-[grid-template-columns] duration-300 ease-out",
-          sidebarOpen ? "grid-cols-[16rem_1fr]" : "grid-cols-[0rem_1fr]",
+          sidebarOpen
+            ? "grid-cols-[16rem_1fr]"
+            : "grid-cols-[0rem_1fr] md:grid-cols-[4.5rem_1fr]",
         )}
       >
         <aside className="sticky top-16 h-[calc(100svh-4rem)] overflow-hidden border-r bg-sidebar text-sidebar-foreground transition-all duration-300 ease-out">

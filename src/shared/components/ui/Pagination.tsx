@@ -16,7 +16,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 }) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
   const pageButtonClass =
-    "inline-flex size-9 items-center justify-center rounded-md border border-input bg-background text-sm font-medium shadow-xs transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
+    "inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-input bg-background text-sm font-medium shadow-xs transition-all duration-200 hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50";
 
   return (
     <nav

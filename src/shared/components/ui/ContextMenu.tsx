@@ -68,7 +68,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
               key={item.label}
               type="button"
               role="menuitem"
-              className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
+              className="flex w-full cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
               disabled={item.disabled}
               onClick={() => {
                 item.onClick();

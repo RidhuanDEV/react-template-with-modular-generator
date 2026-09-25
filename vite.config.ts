@@ -7,13 +7,13 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@/components": path.resolve(__dirname, "./src/shared/components"),
-      "@/hooks": path.resolve(__dirname, "./src/shared/hooks"),
-      "@/lib": path.resolve(__dirname, "./src/shared/lib"),
-      "@/types": path.resolve(__dirname, "./src/shared/types"),
-      "@/utils": path.resolve(__dirname, "./src/shared/utils"),
-      "@/styles": path.resolve(__dirname, "./src/shared/styles"),
-      "@": path.resolve(__dirname, "./src"),
+      "@/components": path.resolve(import.meta.dirname, "./src/shared/components"),
+      "@/hooks": path.resolve(import.meta.dirname, "./src/shared/hooks"),
+      "@/lib": path.resolve(import.meta.dirname, "./src/shared/lib"),
+      "@/types": path.resolve(import.meta.dirname, "./src/shared/types"),
+      "@/utils": path.resolve(import.meta.dirname, "./src/shared/utils"),
+      "@/styles": path.resolve(import.meta.dirname, "./src/shared/styles"),
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
   server: {

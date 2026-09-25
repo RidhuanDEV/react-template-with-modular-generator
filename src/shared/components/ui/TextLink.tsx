@@ -1,4 +1,4 @@
-﻿import React, { type AnchorHTMLAttributes } from "react";
+import React, { type AnchorHTMLAttributes } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
@@ -28,7 +28,7 @@ export const TextLink: React.FC<TextLinkProps> = ({
   }[variant];
 
   const baseClasses = cn(
-    "font-medium underline underline-offset-4 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xs",
+    "cursor-pointer font-medium underline underline-offset-4 transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xs",
     variantClasses,
     className,
   );

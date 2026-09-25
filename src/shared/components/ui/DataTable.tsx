@@ -37,7 +37,7 @@ const getDefaultRowId = <T extends object>(row: T, index: number): string => {
   return `row-${String(index)}`;
 };
 
-const normalizeSortValue = (value: unknown): string | number => {
+const normalizeSortValue = <V,>(value: V): string | number => {
   if (value instanceof Date) {
     return value.getTime();
   }

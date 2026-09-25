@@ -44,7 +44,7 @@ export const ToggleGroup: React.FC<ToggleGroupProps> = ({
           key={item.value}
           type="button"
           className={cn(
-            "inline-flex h-8 items-center justify-center rounded-sm px-3 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+            "inline-flex h-8 cursor-pointer items-center justify-center rounded-sm px-3 text-sm font-medium transition-all hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
             activeValue === item.value &&
               "bg-primary text-primary-foreground shadow-sm",
           )}

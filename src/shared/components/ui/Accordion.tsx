@@ -45,7 +45,7 @@ export const Accordion: React.FC<AccordionProps> = ({
           <div key={item.id}>
             <button
               type="button"
-              className="flex w-full items-center justify-between gap-4 px-4 py-3 text-left text-sm font-medium transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex w-full cursor-pointer items-center justify-between gap-4 px-4 py-3 text-left text-sm font-medium transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               onClick={() => toggleItem(item.id)}
               aria-expanded={isOpen}
               aria-controls={`accordion-content-${item.id}`}

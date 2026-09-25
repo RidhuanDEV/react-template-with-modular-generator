@@ -29,7 +29,7 @@ export const Menubar: React.FC<MenubarProps> = ({ items, className }) => {
           key={item.href}
           to={item.href}
           className={cn(
-            "inline-flex items-center gap-2 rounded-sm px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground",
+            "inline-flex cursor-pointer items-center gap-2 rounded-sm px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground",
             location.pathname === item.href &&
               "bg-accent text-accent-foreground",
           )}

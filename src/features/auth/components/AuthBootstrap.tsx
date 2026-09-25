@@ -33,9 +33,11 @@ export const AuthBootstrap = ({ children }: AuthBootstrapProps) => {
           setAuth(token, response.data);
         }
       } catch (error) {
+        const errorDetail =
+          error instanceof Error ? error : { message: String(error) };
         logger.warn(
           "[Auth] Session bootstrap failed. Clearing auth state.",
-          error,
+          errorDetail,
         );
 
         if (isActive) {

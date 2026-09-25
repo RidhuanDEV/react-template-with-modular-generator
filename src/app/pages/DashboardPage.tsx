@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight, Blocks, Code2, Globe2, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
@@ -45,7 +45,7 @@ const DashboardPage: React.FC = () => {
           return (
             <Card
               key={item.title}
-              className="group overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-md motion-reduce:hover:translate-y-0"
+              className="group cursor-pointer overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:shadow-md motion-reduce:hover:translate-y-0"
             >
               <CardHeader>
                 <div className="flex items-center justify-between gap-4">
