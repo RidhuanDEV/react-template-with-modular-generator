@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { Laptop, Moon, Sun } from "lucide-react";
 import { useUIStore, type ThemeMode } from "@/store/ui.store";
 import { cn } from "@/lib/utils";
@@ -43,7 +43,7 @@ export const AppearanceTabs: React.FC<AppearanceTabsProps> = ({
             type="button"
             onClick={() => setTheme(option.value)}
             className={cn(
-              "inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "inline-flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
               isSelected
                 ? "bg-background text-foreground shadow-xs"
                 : "text-muted-foreground hover:bg-background/50 hover:text-foreground",

@@ -151,6 +151,37 @@
     font: inherit;
   }
 
+  /* Interactive elements pointer cursor */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]):not(:disabled),
+  [role="tab"]:not([aria-disabled="true"]):not(:disabled),
+  [role="menuitem"]:not([aria-disabled="true"]):not(:disabled),
+  [role="switch"]:not([aria-disabled="true"]):not(:disabled),
+  [role="checkbox"]:not([aria-disabled="true"]):not(:disabled),
+  [role="radio"]:not([aria-disabled="true"]):not(:disabled),
+  input[type="button"]:not(:disabled),
+  input[type="submit"]:not(:disabled),
+  input[type="reset"]:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled),
+  input[type="file"]:not(:disabled),
+  select:not(:disabled),
+  summary,
+  a[href],
+  label[for] {
+    cursor: pointer;
+  }
+
+  /* Disabled elements cursor */
+  button:disabled,
+  [role="button"][aria-disabled="true"],
+  [aria-disabled="true"],
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    cursor: not-allowed;
+  }
+
   img {
     @apply block h-auto max-w-full;
   }

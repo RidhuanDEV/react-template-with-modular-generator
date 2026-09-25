@@ -26,7 +26,7 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
           <li key={item.href} className="group relative">
             <Link
               to={item.href}
-              className="inline-flex h-10 items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               {item.icon && (
                 <span className="size-4 shrink-0">{item.icon}</span>
@@ -42,7 +42,7 @@ export const NavigationMenu: React.FC<NavigationMenuProps> = ({
                   <li key={child.href}>
                     <Link
                       to={child.href}
-                      className="block rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+                      className="block cursor-pointer rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
                     >
                       {child.label}
                     </Link>

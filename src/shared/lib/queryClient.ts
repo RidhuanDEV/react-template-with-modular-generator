@@ -3,7 +3,13 @@ import { QueryClient } from "@tanstack/react-query";
 import type { ApiError } from "@/types/api.types";
 import { logger } from "./logger";
 
-const getErrorStatus = (error: unknown): number | undefined => {
+type QueryErrorInput =
+  | Error
+  | object
+  | null
+  | undefined;
+
+const getErrorStatus = (error: QueryErrorInput): number | undefined => {
   if (axios.isAxiosError<ApiError>(error)) {
     return error.response?.status;
   }

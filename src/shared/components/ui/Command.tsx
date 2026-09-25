@@ -68,7 +68,7 @@ export const Command: React.FC<CommandProps> = ({
   return (
     <>
       <div
-        className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm animate-in fade-in-0 duration-200"
+        className="fixed inset-0 z-50 cursor-pointer bg-black/50 backdrop-blur-sm animate-in fade-in-0 duration-200"
         onClick={onClose}
         role="presentation"
       />
@@ -92,7 +92,7 @@ export const Command: React.FC<CommandProps> = ({
           />
           <button
             type="button"
-            className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+            className="inline-flex size-7 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
             onClick={onClose}
             aria-label="Close"
           >
@@ -111,7 +111,7 @@ export const Command: React.FC<CommandProps> = ({
                 <button
                   key={item.id}
                   type="button"
-                  className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-left text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   onClick={() => {
                     item.onSelect();
                     onClose();

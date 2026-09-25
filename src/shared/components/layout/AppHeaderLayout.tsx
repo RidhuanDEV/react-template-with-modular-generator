@@ -1,4 +1,4 @@
-﻿import React, { type ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { BarChart3, Settings } from "lucide-react";
@@ -39,7 +39,7 @@ export const AppHeaderLayout: React.FC<AppHeaderLayoutProps> = ({
                     to={item.to}
                     className={({ isActive }) =>
                       cn(
-                        "flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors no-underline",
+                        "flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors no-underline",
                         isActive
                           ? "bg-accent text-accent-foreground font-semibold shadow-2xs"
                           : "text-muted-foreground hover:bg-accent/50 hover:text-foreground",

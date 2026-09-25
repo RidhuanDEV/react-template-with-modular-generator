@@ -5,7 +5,14 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import type { TableColumn } from "@/types/common.types";
 import { cn } from "@/lib/utils";
 
-type SortableValue = string | number | boolean | Date | null | undefined;
+type SortableValue =
+  | string
+  | number
+  | boolean
+  | Date
+  | null
+  | undefined
+  | object;
 
 export interface DataTableColumn<T extends object> extends TableColumn<T> {
   sortable?: boolean;
@@ -37,7 +44,7 @@ const getDefaultRowId = <T extends object>(row: T, index: number): string => {
   return `row-${String(index)}`;
 };
 
-const normalizeSortValue = (value: unknown): string | number => {
+const normalizeSortValue = <V,>(value: V): string | number => {
   if (value instanceof Date) {
     return value.getTime();
   }

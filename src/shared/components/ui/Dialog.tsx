@@ -53,7 +53,7 @@ export const Dialog: React.FC<DialogProps> = ({
             <h2 className="text-lg font-semibold tracking-normal">{title}</h2>
             <button
               type="button"
-              className="inline-flex size-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               onClick={onClose}
               aria-label="Close"
             >

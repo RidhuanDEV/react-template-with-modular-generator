@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ChevronDown, LogOut, Palette, Shield, User } from "lucide-react";
@@ -48,7 +48,7 @@ export const NavUser: React.FC<NavUserProps> = ({ compact = false }) => {
   ];
 
   const trigger = (
-    <div className="flex items-center gap-2.5 rounded-lg p-1.5 transition-colors hover:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+    <div className="flex cursor-pointer items-center gap-2.5 rounded-lg p-1.5 transition-colors hover:bg-accent/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
       <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground shadow-xs">
         {userInitial}
       </span>

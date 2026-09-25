@@ -71,7 +71,7 @@ export const Tabs: React.FC<TabsProps> = ({
             aria-selected={activeTab === tab.id}
             aria-controls={`tabpanel-${tab.id}`}
             className={cn(
-              "inline-flex h-8 items-center justify-center whitespace-nowrap rounded-sm px-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+              "inline-flex h-8 cursor-pointer items-center justify-center whitespace-nowrap rounded-sm px-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
               activeTab === tab.id && "bg-background text-foreground shadow-sm",
             )}
             onClick={() => handleTabClick(tab.id)}

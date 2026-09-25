@@ -1,4 +1,4 @@
-﻿import React, { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Globe } from "lucide-react";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
@@ -10,12 +10,21 @@ interface LanguageSelectorProps {
   variant?: "dropdown" | "compact";
 }
 
+const isSupportedLanguage = (
+  code: string | undefined,
+): code is SupportedLanguage => {
+  return code === "en" || code === "id";
+};
+
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   className,
   variant = "dropdown",
 }) => {
   const { i18n } = useTranslation();
-  const currentLang = (i18n.language?.slice(0, 2) as SupportedLanguage) || "en";
+  const langCode = i18n.language?.slice(0, 2);
+  const currentLang: SupportedLanguage = isSupportedLanguage(langCode)
+    ? langCode
+    : "en";
 
   const currentOption =
     SUPPORTED_LANGUAGES.find((lang) => lang.code === currentLang) ??
@@ -38,7 +47,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   const trigger = (
     <div
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md border border-input bg-background px-2.5 py-1.5 text-xs font-medium text-foreground shadow-2xs transition-colors hover:bg-accent/70 hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-input bg-background px-2.5 py-1.5 text-xs font-medium text-foreground shadow-2xs transition-colors hover:bg-accent/70 hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
         className,
       )}
       aria-label="Change language"

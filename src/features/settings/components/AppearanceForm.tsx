@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Laptop, Moon, Sun, Check } from "lucide-react";
 import { useUIStore, type ThemeMode } from "@/store/ui.store";
@@ -9,21 +9,28 @@ export const AppearanceForm: React.FC = () => {
   const { t } = useTranslation(["settings", "common"]);
   const { theme, setTheme } = useUIStore();
 
-  const themeOptions = [
+  interface ThemeOption {
+    value: ThemeMode;
+    title: string;
+    description: string;
+    icon: typeof Sun;
+  }
+
+  const themeOptions: ThemeOption[] = [
     {
-      value: "light" as ThemeMode,
+      value: "light",
       title: t("settings:lightMode"),
       description: t("settings:lightModeDesc"),
       icon: Sun,
     },
     {
-      value: "dark" as ThemeMode,
+      value: "dark",
       title: t("settings:darkMode"),
       description: t("settings:darkModeDesc"),
       icon: Moon,
     },
     {
-      value: "system" as ThemeMode,
+      value: "system",
       title: t("settings:systemPref"),
       description: t("settings:systemPrefDesc"),
       icon: Laptop,
@@ -54,7 +61,7 @@ export const AppearanceForm: React.FC = () => {
                 type="button"
                 onClick={() => setTheme(option.value)}
                 className={cn(
-                  "relative flex flex-col items-start gap-3 rounded-xl border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  "relative flex cursor-pointer flex-col items-start gap-3 rounded-xl border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                   isSelected
                     ? "border-primary bg-primary/5 shadow-sm ring-1 ring-primary"
                     : "border-border/60 hover:border-border hover:bg-muted/30",

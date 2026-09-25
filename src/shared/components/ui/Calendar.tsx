@@ -75,7 +75,7 @@ export const Calendar: React.FC<CalendarProps> = ({
             key={day}
             type="button"
             className={cn(
-              "inline-flex size-8 items-center justify-center rounded-md text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40",
+              "inline-flex size-8 cursor-pointer items-center justify-center rounded-md text-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40",
               isSelected(day) &&
                 "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground",
             )}

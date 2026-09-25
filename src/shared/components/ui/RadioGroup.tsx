@@ -43,7 +43,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
                 checked={value === opt.value}
                 onChange={onChange}
                 disabled={disabled ?? opt.disabled}
-                className="size-4 accent-primary"
+                className="size-4 cursor-pointer accent-primary disabled:cursor-not-allowed"
               />
               <span className="text-foreground">{opt.label}</span>
             </label>
