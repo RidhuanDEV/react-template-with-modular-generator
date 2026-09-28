@@ -1,0 +1,61 @@
+{
+  "name": "modular-react-ridhuan",
+  "version": "1.0.0",
+  "author": "Ridhuan",
+  "description": "Enterprise modular React starter with ColorHunt-powered theme palettes and asset generators",
+  "theme": {
+    "paletteSource": "https://colorhunt.co/",
+    "paletteName": "modern-indigo",
+    "colors": {
+      "primary": "#4F46E5",
+      "secondary": "#64748B",
+      "accent": "#06B6D4",
+      "background": "#F8FAFC"
+    }
+  },
+  "assets": {
+    "icons": {
+      "selected": ["lucide-react"],
+      "allowedProviders": [
+        {
+          "name": "Lucide React",
+          "package": "lucide-react",
+          "url": "https://lucide.dev/",
+          "iconsUrl": "https://lucide.dev/icons"
+        },
+        {
+          "name": "Heroicons",
+          "package": "@heroicons/react",
+          "url": "https://heroicons.com/"
+        },
+        {
+          "name": "Tabler Icons",
+          "package": "@tabler/icons-react",
+          "url": "https://tabler.io/icons"
+        },
+        {
+          "name": "Simple Icons",
+          "package": "simple-icons",
+          "url": "https://simpleicons.org/"
+        }
+      ]
+    },
+    "illustrations": {
+      "selected": "undraw",
+      "allowedProviders": [
+        {
+          "name": "unDraw",
+          "url": "https://undraw.co/illustrations"
+        },
+        {
+          "name": "ManyPixels",
+          "url": "https://www.manypixels.co/gallery"
+        },
+        {
+          "name": "Public Domain Vectors",
+          "url": "https://publicdomainvectors.org/"
+        }
+      ]
+    }
+  }
+}

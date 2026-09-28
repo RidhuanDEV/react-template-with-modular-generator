@@ -63,7 +63,7 @@ export const Alert: React.FC<AlertProps> = ({
       {onClose && (
         <button
           type="button"
-          className="rounded-md p-1 text-current/70 transition-colors hover:bg-background/40 hover:text-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="cursor-pointer rounded-md p-1 text-current/70 transition-colors hover:bg-background/40 hover:text-current focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           onClick={onClose}
           aria-label="Close alert"
         >
