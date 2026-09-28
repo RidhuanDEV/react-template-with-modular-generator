@@ -1,7 +1,41 @@
 {
-  "name": "react",
-  "private": true,
-  "version": "0.0.0",
+  "name": "modular-react-ridhuan",
+  "version": "1.0.0",
+  "description": "Enterprise React 19 Starter Kit with Modular Generator, ColorHunt Theme Engine, and Tailwind CSS v4",
+  "author": "Ridhuan",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "react19",
+    "modular-architecture",
+    "starter-kit",
+    "scaffolding",
+    "cli",
+    "tailwind-v4",
+    "colorhunt"
+  ],
+  "bin": {
+    "modular-react-ridhuan": "./bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "public",
+    "scripts",
+    "modular.config.json",
+    ".env.example",
+    "_gitignore",
+    "index.html",
+    "vite.config.ts",
+    "tsconfig.json",
+    "tsconfig.app.json",
+    "tsconfig.node.json",
+    "eslint.config.js",
+    "README.md",
+    "DESIGN.md",
+    "AGENTS.md",
+    "CLAUDE.md"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",

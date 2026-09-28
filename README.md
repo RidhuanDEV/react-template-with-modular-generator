@@ -1,4 +1,4 @@
-﻿# React Enterprise Starter Template (Modular & i18n Ready)
+# React Enterprise Starter Template (Modular & i18n Ready)
 
 This repository is a production-grade React 19 starter for building scalable, high-performance web applications with a **modular folder boundaries layout**, **built-in scaffolding engines**, **full authentication & settings workflows**, and **enterprise internationalization (i18n)**.
 
@@ -32,6 +32,18 @@ It is designed to be:
 - npm 10+
 
 ## Quick Start
+
+### Option A: Create a New Project via Interactive CLI (Recommended)
+
+```bash
+npx modular-react-ridhuan my-app
+```
+Follow the interactive CLI prompts to:
+1. Select your preferred color palette from [ColorHunt.co](https://colorhunt.co/) (Modern Indigo, Cyber Teal, Sunset Coral, Nordic Slate, Emerald Tech, or custom Hex colors).
+2. Choose your trusted icon provider (Lucide React [https://lucide.dev/](https://lucide.dev/), Heroicons, Tabler Icons).
+3. The CLI automatically scaffolds the app, creates `.env`, and configures `modular.config.json`!
+
+### Option B: Clone & Run Directly
 
 1. **Install dependencies**:
    ```bash
