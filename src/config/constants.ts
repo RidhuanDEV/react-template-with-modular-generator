@@ -1,4 +1,4 @@
-export const APP_NAME = "Starter App";
+export const APP_NAME = "Modular React by Ridhuan";
 
 export const STORAGE_KEYS = {
   AUTH_SESSION: "auth_session",
