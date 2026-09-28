@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useAuthStore } from "@/store/auth.store";
 import { ROUTES } from "@/config/routes";
+import { APP_VERSION } from "@/config/constants";
 import { AppLogo } from "@/components/layout/AppLogo";
 import { AppearanceTabs } from "@/components/ui/AppearanceTabs";
 import { LanguageSelector } from "@/components/ui/LanguageSelector";
@@ -430,7 +431,7 @@ npm run generate:page <Name> [feature]`}</code>
               Usage & Guide
             </h2>
             <Badge variant="primary" className="text-[11px]">
-              v1.0.2
+              v{APP_VERSION}
             </Badge>
           </div>
           <Tabs tabs={usageTabs} defaultTab="quickstart" />
@@ -468,7 +469,9 @@ npm run generate:page <Name> [feature]`}</code>
             rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <span className="font-mono text-[11px]">v1.0.2 • React 19</span>
+            <span className="font-mono text-[11px]">
+              v{APP_VERSION} • React 19
+            </span>
           </div>
         </div>
       </footer>

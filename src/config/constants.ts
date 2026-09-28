@@ -1,4 +1,5 @@
 export const APP_NAME = "Modular React by Ridhuan";
+export const APP_VERSION = "1.0.6";
 
 export const STORAGE_KEYS = {
   AUTH_SESSION: "auth_session",
