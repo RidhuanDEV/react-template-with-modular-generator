@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shared/styles/globals.css";
+
+@source "../index.html";
+@source "./**/*.{ts,tsx}";

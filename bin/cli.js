@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
+import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -318,7 +319,14 @@ VITE_COLOR_BACKGROUND=${chosenPalette.background}
     }
   }
 
-  // 8. Completion Announcement
+  // 8. Initialize git repository if git CLI is available (standard for modern CLIs)
+  try {
+    execSync("git init", { cwd: destPath, stdio: "ignore" });
+  } catch {
+    // Graceful fallback if git is not installed or available on PATH
+  }
+
+  // 9. Completion Announcement
   console.log(`
 ${c.green}${c.bold}🎉 SUCCESS!${c.reset} ${c.bold}Your modular React project is ready at:${c.reset} ${c.cyan}${destPath}${c.reset}
 

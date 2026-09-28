@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "@/styles/globals.css";
+import "./index.css";
 import "@/locales/i18n";
 import { initializeEnvTheme } from "@/lib/theme";
 import App from "@/app/App";
