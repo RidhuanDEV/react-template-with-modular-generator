@@ -7,7 +7,10 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@/components": path.resolve(import.meta.dirname, "./src/shared/components"),
+      "@/components": path.resolve(
+        import.meta.dirname,
+        "./src/shared/components",
+      ),
       "@/hooks": path.resolve(import.meta.dirname, "./src/shared/hooks"),
       "@/lib": path.resolve(import.meta.dirname, "./src/shared/lib"),
       "@/types": path.resolve(import.meta.dirname, "./src/shared/types"),
@@ -17,8 +20,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
-    strictPort: true,
+    port: 5173,
   },
   build: {
     sourcemap: true,
