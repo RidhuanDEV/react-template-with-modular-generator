@@ -12,14 +12,12 @@ export const AuthBootstrap = ({ children }: AuthBootstrapProps) => {
   const token = useAuthStore((state) => state.token);
   const setAuth = useAuthStore((state) => state.setAuth);
   const logout = useAuthStore((state) => state.logout);
-  const [isReady, setIsReady] = useState(false);
+  const [isReady, setIsReady] = useState(!token);
 
   useEffect(() => {
     let isActive = true;
 
     if (!token) {
-      setIsReady(true);
-
       return () => {
         isActive = false;
       };
@@ -50,7 +48,6 @@ export const AuthBootstrap = ({ children }: AuthBootstrapProps) => {
       }
     };
 
-    setIsReady(false);
     void bootstrapSession();
 
     return () => {
