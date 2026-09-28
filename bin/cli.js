@@ -137,7 +137,14 @@ ${c.bold}Features:${c.reset}
   }
 
   if (args.includes("--version") || args.includes("-v")) {
-    console.log("1.0.0");
+    try {
+      const pkgJson = JSON.parse(
+        fs.readFileSync(path.join(packageRoot, "package.json"), "utf-8"),
+      );
+      console.log(pkgJson.version);
+    } catch {
+      console.log("1.0.2");
+    }
     rl.close();
     process.exit(0);
   }
@@ -180,7 +187,9 @@ ${c.bold}Features:${c.reset}
   );
 
   const paletteChoice = (
-    await askQuestion(`\n${c.yellow}Enter choice (1-6) [default: 1]:${c.reset} `)
+    await askQuestion(
+      `\n${c.yellow}Enter choice (1-6) [default: 1]:${c.reset} `,
+    )
   ).trim();
 
   let chosenPalette = PALETTES[0];
@@ -231,7 +240,9 @@ ${c.bold}Features:${c.reset}
   );
 
   const iconChoice = (
-    await askQuestion(`\n${c.yellow}Enter choice (1-4) [default: 1]:${c.reset} `)
+    await askQuestion(
+      `\n${c.yellow}Enter choice (1-4) [default: 1]:${c.reset} `,
+    )
   ).trim();
 
   let selectedIcons = ["lucide-react"];

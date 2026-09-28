@@ -2,7 +2,7 @@ import { z } from "zod/v4";
 
 const envSchema = z.object({
   VITE_API_BASE_URL: z.url().default("http://localhost:8000/api"),
-  VITE_APP_NAME: z.string().trim().min(1).default("Starter App"),
+  VITE_APP_NAME: z.string().trim().min(1).default("Modular React by Ridhuan"),
   VITE_APP_ENV: z
     .enum(["development", "staging", "production", "test"])
     .default("development"),

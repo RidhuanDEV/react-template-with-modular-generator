@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -30,6 +30,10 @@ const WelcomePage: React.FC = () => {
   const { t } = useTranslation(["common", "auth", "dashboard"]);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [copiedCommand, setCopiedCommand] = useState(false);
+
+  useEffect(() => {
+    document.title = "Home Page Modular React by Ridhuan";
+  }, []);
 
   const handleCopyCommand = (command: string): void => {
     navigator.clipboard
@@ -330,6 +334,8 @@ npm run generate:page <Name> [feature]`}</code>
           <div className="relative flex size-20 items-center justify-center rounded-2xl bg-primary/10 p-2 shadow-inner ring-1 ring-primary/20">
             <svg
               viewBox="-11.5 -10.23174 23 20.46348"
+              width={56}
+              height={56}
               className="size-14 text-primary animate-[spin_20s_linear_infinite]"
               fill="none"
               aria-label="React Logo"
@@ -424,7 +430,7 @@ npm run generate:page <Name> [feature]`}</code>
               Usage & Guide
             </h2>
             <Badge variant="primary" className="text-[11px]">
-              v1.0.0
+              v1.0.2
             </Badge>
           </div>
           <Tabs tabs={usageTabs} defaultTab="quickstart" />
@@ -462,7 +468,7 @@ npm run generate:page <Name> [feature]`}</code>
             rights reserved.
           </p>
           <div className="flex items-center gap-4">
-            <span className="font-mono text-[11px]">v1.0.0 • React 19</span>
+            <span className="font-mono text-[11px]">v1.0.2 • React 19</span>
           </div>
         </div>
       </footer>

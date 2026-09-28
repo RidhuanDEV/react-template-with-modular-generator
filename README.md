@@ -38,7 +38,9 @@ It is designed to be:
 ```bash
 npx modular-react-ridhuan my-app
 ```
+
 Follow the interactive CLI prompts to:
+
 1. Select your preferred color palette from [ColorHunt.co](https://colorhunt.co/) (Modern Indigo, Cyber Teal, Sunset Coral, Nordic Slate, Emerald Tech, or custom Hex colors).
 2. Choose your trusted icon provider (Lucide React [https://lucide.dev/](https://lucide.dev/), Heroicons, Tabler Icons).
 3. The CLI automatically scaffolds the app, creates `.env`, and configures `modular.config.json`!
@@ -53,7 +55,7 @@ Follow the interactive CLI prompts to:
    Copy `.env.example` to `.env` if needed:
    ```env
    VITE_API_BASE_URL=http://localhost:8000/api
-   VITE_APP_NAME=Starter App
+   VITE_APP_NAME=Modular React by Ridhuan
    VITE_APP_ENV=development
    ```
 3. **Start the dev server**:
